@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GetAccBalance</class>
+ <widget class="QDialog" name="GetAccBalance">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+
+
+font-size:24px;
+
+font-weight:500;
+
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Enter Account Number</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Account Number</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_accNumError">
+       <property name="styleSheet">
+        <string notr="true">QLabel{
+
+
+color:red;
+}</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_accnum">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_balance">
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+
+
+font-size:20px;
+
+font-weight:500;
+
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Balance : </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_back">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+
+
+height:40px;
+
+
+}</string>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_confirm">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+
+
+height:40px;
+
+
+}</string>
+       </property>
+       <property name="text">
+        <string>Confirm</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

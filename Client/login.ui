@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Login</class>
+ <widget class="QWidget" name="Login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>407</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_login">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>310</y>
+     <width>131</width>
+     <height>65</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+
+border: none;
+background-color: #DBD9D9;
+border-radius:16px;
+color:#013763;
+min-width:100px;
+min-height:65px;
+font-size:24px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Log in</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>24</y>
+     <width>381</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+
+max-height:32px;
+font-size:24px;
+font-weight:bold;
+color:#DBD9D9;
+
+
+}</string>
+      </property>
+      <property name="text">
+       <string>Log in</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_userName">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+
+font-size:16px;
+color:red;
+
+}</string>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_username">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+
+border-radius:20px;
+border :3px solid #DBD9D9;
+padding-top: 2px;
+padding-bottom: 2px;
+padding-left: 20px;
+max-height:32px;
+background-color:transparent;
+color:#DBD9D9;
+font-size: 18px;
+margin-top:0px;
+}
+
+
+QLineEdit::focus{
+
+border :3px solid #f1f1f1;
+
+
+}
+
+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_password">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+
+font-size:16px;
+color:red;
+
+}</string>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_password">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+
+border-radius:20px;
+border :3px solid #DBD9D9;
+padding-top: 2px;
+padding-bottom: 2px;
+padding-left: 20px;
+max-height:32px;
+background-color:transparent;
+color:#DBD9D9;
+font-size: 18px
+}
+
+
+QLineEdit::focus{
+
+border :3px solid #f1f1f1;
+
+
+}
+
+</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

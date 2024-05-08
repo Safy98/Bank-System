@@ -1,0 +1,112 @@
+{
+    "Safy98": {
+        "AccountBalance": "1000",
+        "AccountNumber": "1",
+        "Age": "25",
+        "FullName": "Admin",
+        "IsAdmin": true,
+        "Password": "safee1234S$",
+        "TransactionHistory": [
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "10000",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "1000",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-10000",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            }
+        ]
+    },
+    "momen": {
+        "AccountBalance": "10100",
+        "AccountNumber": "558",
+        "Age": "18",
+        "FullName": "momen srio",
+        "IsAdmin": false,
+        "Password": "momen1234S$",
+        "TransactionHistory": [
+            {
+                "Amount": "0",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "100",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "10000",
+                "Type": "Deposit",
+                "date": "08.05.2024"
+            },
+            {
+                "Amount": "-100",
+                "Type": "Withdraw",
+                "date": "08.05.2024"
+            }
+        ]
+    }
+}

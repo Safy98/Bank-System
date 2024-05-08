@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateUserWindow</class>
+ <widget class="QDialog" name="CreateUserWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+
+min-width:600px;
+max-width:600px;
+min-height:600px;
+max-height:600px;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+
+font-size:25px;
+font-weight:bold;
+min-width:200px;
+max-height:30px
+
+
+
+}</string>
+     </property>
+     <property name="text">
+      <string>Create User</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+font-weight:500;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>Full Name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_fullNameError">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+color:red;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_FullName">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+font-weight:500;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>Age</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_ageError">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+color:red;
+
+}
+</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBox_Age">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+font-weight:500;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>User Name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_userNameError">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+color:red;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_UserName">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+font-weight:500;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>Password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_passwordError">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+color:red;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_Password">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+font-weight:500;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>Confirm Password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_confPasswordError">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+
+color:red;
+
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_ConfirmPassword">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+
+
+height:30px;
+outline:none;
+border-radius:5px;
+border:1px solid #ccc;
+padding-left:15px;
+font-size:16px;
+
+}
+</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="checkBox_IsAdmin">
+     <property name="text">
+      <string>Is Admin</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+
+
+height:40px;
+
+
+}</string>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+
+
+height:40px;
+
+
+}</string>
+       </property>
+       <property name="text">
+        <string>Confirm</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
