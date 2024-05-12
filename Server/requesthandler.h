@@ -23,7 +23,6 @@ private:
     Logger *requestLogs;
     DataBasaHandler * dataBaseManager;
     QMutex * globalMutex ;
-    DataBasaHandler* dataBaseManger;
 };
 
 #endif // REQUESTHANDLER_H

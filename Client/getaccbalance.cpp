@@ -21,7 +21,6 @@ void GetAccBalance::responseSuccessfull(QString balance)
 
 void GetAccBalance::responseFailed(int errorState)
 {
-    qInfo()<<errorState<<"response get failed";
 
     if(errorState == -1)
     {

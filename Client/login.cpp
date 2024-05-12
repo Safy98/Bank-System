@@ -31,12 +31,10 @@ Login::~Login()
 
 void Login::failedLoginSlot(int errorState)
 {
-    qInfo()<<errorState;
 
 
     if(errorState  == -1 )
     {
-        qInfo()<<"hi";
         ui->label_userName->setText("Username doesn't exist");
         ui->label_userName->show();
         ui->pushButton_login->setEnabled(true);
@@ -45,7 +43,6 @@ void Login::failedLoginSlot(int errorState)
     }
     if(errorState  == -2 )
     {
-        qInfo()<<"hi";
         ui->label_password->setText("Incorrect Password ");
         ui->label_password->show();
         ui->pushButton_login->setEnabled(true);
@@ -64,7 +61,6 @@ void Login::failedLoginSlot(int errorState)
     }
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_userName->setText("Username can't be empty");
         ui->label_userName->show();
         ui->pushButton_login->setEnabled(true);
@@ -111,9 +107,7 @@ void Login::on_pushButton_login_clicked()
     ui->pushButton_login->setDisabled(true);
 
 
-    qInfo()<<"hi on_pushButton_login_clicked ";
-    qInfo()<<userName;
-    qInfo()<<password;
+   
 
     emit loginDataAquired(userName,password);
 

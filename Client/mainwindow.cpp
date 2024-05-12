@@ -23,7 +23,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pbContinue_clicked()
 {
-    qInfo()<<"clicked";
     emit connectToTheServer();
 
 
@@ -32,14 +31,12 @@ void MainWindow::on_pbContinue_clicked()
 
 void MainWindow::loginDataAquired(QString username, QString Password)
 {
-     qInfo()<<"hi loginDataAquired ";
     QJsonObject request;
 
      request["RequestID"]="0";
      request["UserName"]=username;
     request["Password"]=Password;
-     qInfo()<<username;
-     qInfo()<<Password;
+    
    emit WLoginDataAquired(request);
 
 
@@ -47,7 +44,6 @@ void MainWindow::loginDataAquired(QString username, QString Password)
 
 void MainWindow::failedLoginSlot(int errorState)
 {
-    qInfo()<<errorState;
 
     emit failedLoginSignal( errorState);
 

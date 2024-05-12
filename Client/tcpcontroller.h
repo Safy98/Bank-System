@@ -10,7 +10,7 @@ class TcpController : public QObject
     Q_OBJECT
 public:
     explicit TcpController(QObject *parent = nullptr);
-
+    ~TcpController();
 
     void makeTcpRequest(QByteArray request);
     void makeConnection();

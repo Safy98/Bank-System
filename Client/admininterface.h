@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QJsonObject>
 #include "createuserwindow.h"
 #include "agetaccountnumwindow.h"
 #include "deleteuserwindow.h"
@@ -10,72 +11,80 @@
 #include "viewtranshistory.h"
 #include "viewdb.h"
 #include "getaccbalance.h"
-#include <QJsonObject>
-namespace Ui {
-class AdminInterface;
+#include "iuser.h"
+
+namespace Ui
+{
+    class AdminInterface;
 }
 
-class AdminInterface : public QDialog
+class AdminInterface : public IUser
 {
     Q_OBJECT
 
 public:
-    explicit AdminInterface(QWidget *parent = nullptr);
+    explicit AdminInterface(IUser * parent = nullptr);
     ~AdminInterface();
 
-private slots:
-    void on_pbCreateUser_clicked();
-
-    void on_pbGetAccountNum_clicked();
-
-    void on_pbDeleteeUser_clicked();
-
-    void on_pbUpdateUser_clicked();
-
-    void on_pushButton_logout_clicked();
-
-    void on_pbViewTransHistory_clicked();
-
 public slots:
-    void createUserRequest(QString fullName ,int age,QString userName,QString password,QString confPassword,bool isAdmin);
-    void getAccountNumberRequest(QString username);
+
+    //Invoked by signal from the AccountController
+    void responseReady(QJsonObject response) Q_DECL_OVERRIDE;
+
+    //Invoked by signals from each Request GUI 
+    //when the confirm button is clicked
+    void createUserRequest(QString fullName, int age, QString userName, QString password, QString confPassword, bool isAdmin);
+    void getAccountNumberRequest(QString username) Q_DECL_OVERRIDE;
     void deleteUserRequest(QString accountNumber);
-    void updateUserRequest(QString accountNumber,QString fullName ,int age,QString userName,QString password,QString confPassword,bool isAdmin);
-    void sendViewTransHistory(QString accountNumber , QString count);
-    void GetAccountBalance(QString accountNumber);
-    void responseReady(QJsonObject response);
-    void backPressed();
+    void updateUserRequest(QString accountNumber, QString fullName, int age, QString userName, QString password, QString confPassword, bool isAdmin);
+    void viewTransHistoryRequest(QString accountNumber, QString count) Q_DECL_OVERRIDE;
+    void getAccountBalanceRequest(QString accountNumber) Q_DECL_OVERRIDE;
 
-
+    //Invoked by signals from each Request GUI 
+    //when the Back button is clicked
+    void backPressed() Q_DECL_OVERRIDE;
 
 private slots:
-   void createTransHistoryUI(void);
-   void createViewDBUI(void);
-   void createGetAccNumUI(void);
 
-   void connectedSuccessfully();
-   void disconnected();
+    //Invoked by each crossponding button in the admin GUI
+    void createTransHistoryUI() Q_DECL_OVERRIDE;
+    void createCreateUserUI(void);
+    void createUpdateUserUI(void);
+    void createDeleteUserUI(void);
+    void createViewDBUI(void);
+    void createGetAccNumUI() Q_DECL_OVERRIDE;
+    void createGetAccBalanceUI() Q_DECL_OVERRIDE;
+    void connectedSuccessfully() Q_DECL_OVERRIDE;
+    void disconnected() Q_DECL_OVERRIDE;
 
+
+
+    //Invoked by the GUI
+    void on_pbCreateUser_clicked();
+    void on_pbGetAccountNum_clicked();
+    void on_pbDeleteeUser_clicked();
+    void on_pbUpdateUser_clicked();
+    void on_pushButton_logout_clicked();
+    void on_pbViewTransHistory_clicked();
     void on_pbViewDB_clicked();
-
-   void on_pbGetAccountBalance_clicked();
-
+    void on_pbGetAccountBalance_clicked();
     void on_pushButton_connectState_clicked();
 
-signals:
-    void adminRequest(QJsonObject request);
-    void connectToTheServer();
-
-    void logout(void);
 private:
+
     Ui::AdminInterface *ui;
-    CreateUserWindow* createUserWindow ;
-    AgetAccountNumWindow* accountNumberWindow;
-    DeleteUserWindow * deleteUserWindow;
-    UpdateUserWindow * updateUserWindow;
-    ViewTransHistory * viewTransHistory;
-    ViewDB * viewDBWindow;
-    GetAccBalance * getAccountBalanceWindow;
+    CreateUserWindow *createUserWindow;
+    AgetAccountNumWindow *accountNumberWindow;
+    DeleteUserWindow *deleteUserWindow;
+    UpdateUserWindow *updateUserWindow;
+    ViewTransHistory *viewTransHistory;
+    ViewDB *viewDBWindow;
+    GetAccBalance *getAccountBalanceWindow;
+
+    // IUser interface
+protected slots:
+
+    // IUser interface
 };
 
 #endif // ADMININTERFACE_H

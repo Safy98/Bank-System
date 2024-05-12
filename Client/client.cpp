@@ -1,6 +1,8 @@
 #include "client.h"
 
-
+/// @brief creates Client object if no Client instance has been created , otherwise returns reffernce to the existing object
+/// @param parent pointer to the parent object
+/// @return refrence to the only Client object in the system
 Client& Client::ClientInstance(QObject *parent)
 {
     static Client *instance = new Client(parent);
@@ -8,6 +10,8 @@ Client& Client::ClientInstance(QObject *parent)
 
     return *instance;
 }
+
+
 
 Client::Client(QObject *parent)
     : QObject{parent}
@@ -18,7 +22,7 @@ Client::Client(QObject *parent)
 
     QThread *clientThread = new QThread(this);
 
-    // when the thread finishes it will be scedueled for deletion
+    // when the thread finishes it will be scheduled for deletion
     connect(clientThread,&QThread::finished,clientThread,&QThread::deleteLater);
 
     // this object is responible for all the logic before sending the data to the server 

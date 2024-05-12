@@ -1,8 +1,8 @@
 #include "userinterface.h"
 #include "ui_userinterface.h"
 
-UserInterface::UserInterface(QString name ,QWidget *parent)
-    : QDialog(parent)
+UserInterface::UserInterface(QString name , IUser * parent )
+    : IUser(parent)
     , ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
@@ -16,7 +16,7 @@ UserInterface::~UserInterface()
     delete ui;
 }
 
-void UserInterface::sendTransRequest(QString accountNumber, QString amount)
+void UserInterface::TransactionRequest(QString accountNumber, QString amount)
 {
     QJsonObject request;
 
@@ -25,29 +25,29 @@ void UserInterface::sendTransRequest(QString accountNumber, QString amount)
     request["Amount"] = amount;
 
 
-   emit userRequest(request);
+   emit Request(request);
 }
 
-void UserInterface::getAccountBalance(QString accountNumber)
+void UserInterface::getAccountBalanceRequest(QString accountNumber)
 {
     QJsonObject request;
     request["RequestID"]="7";
     request["AccountNumber"]=accountNumber;
 
-    emit userRequest(request);
+    emit Request(request);
 }
 
-void UserInterface::getAccountNumber(QString userName)
+void UserInterface::getAccountNumberRequest(QString userName)
 {
     QJsonObject request;
     request["RequestID"]="2";
     request["UserName"]=userName;
 
-    emit userRequest(request);
+    emit Request(request);
 
 }
 
-void UserInterface::sendViewTransHistory(QString accountNumber, QString count)
+void UserInterface::viewTransHistoryRequest(QString accountNumber, QString count)
 {
 
 
@@ -57,7 +57,7 @@ void UserInterface::sendViewTransHistory(QString accountNumber, QString count)
         request["Count"]=count;
 
 
-        emit userRequest(request);
+        emit Request(request);
 
 
 }
@@ -72,13 +72,12 @@ void UserInterface::sendTransferRequest(QString senderaccountNumber, QString rec
     request["Amount"]=amount;
 
 
-    emit userRequest(request);
+    emit Request(request);
 }
 
 void UserInterface::responseReady(QJsonObject response)
 {
     int id = response.value("ResponseID").toString().toInt();
-    qInfo()<<"creaaaaate respooonse id"<<id;
     switch(id)
     {
     case -1:
@@ -94,7 +93,6 @@ void UserInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             getAccNumUI->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -108,7 +106,6 @@ void UserInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             viewTransHistory->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -122,7 +119,6 @@ void UserInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             getAccBalance->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -173,11 +169,7 @@ void UserInterface::backPressed()
 }
 void UserInterface::on_pushButton_makeTransaction_clicked()
 {
-    makeTrans = new MakeTransaction(this);
-
-    connect(makeTrans,&MakeTransaction::sendTransRequest,this,&UserInterface::sendTransRequest);
-    connect(makeTrans,&MakeTransaction::backPressed,this,&UserInterface::backPressed);
-    makeTrans->exec();
+   createMakeTransactionUI();
 }
 
 
@@ -191,10 +183,19 @@ void UserInterface::createGetAccNumUI()
     getAccNumUI = new AgetAccountNumWindow(this);
 
     connect(getAccNumUI,&AgetAccountNumWindow::backPressed,this,&UserInterface::backPressed);
-    connect(getAccNumUI,&AgetAccountNumWindow::getAccountNumberRequest,this,&UserInterface::getAccountNumber);
+    connect(getAccNumUI,&AgetAccountNumWindow::getAccountNumberRequest,this,&UserInterface::getAccountNumberRequest);
 
 
     getAccNumUI->exec();
+}
+
+void UserInterface::createMakeTransactionUI()
+{
+    makeTrans = new MakeTransaction(this);
+
+    connect(makeTrans,&MakeTransaction::sendTransRequest,this,&UserInterface::TransactionRequest);
+    connect(makeTrans,&MakeTransaction::backPressed,this,&UserInterface::backPressed);
+    makeTrans->exec();
 }
 
 void UserInterface::createGetAccBalanceUI()
@@ -202,7 +203,7 @@ void UserInterface::createGetAccBalanceUI()
     getAccBalance = new GetAccBalance(this);
 
     connect(getAccBalance,&GetAccBalance::backPressed,this,&UserInterface::backPressed);
-    connect(getAccBalance,&GetAccBalance::GetAccountBalance,this,&UserInterface::getAccountBalance);
+    connect(getAccBalance,&GetAccBalance::GetAccountBalance,this,&UserInterface::getAccountBalanceRequest);
 
     getAccBalance->exec();
 }
@@ -213,7 +214,7 @@ void UserInterface::createTransHistoryUI()
 
     //connects
     connect(viewTransHistory,&ViewTransHistory::backPressed,this,&UserInterface::backPressed);
-    connect(viewTransHistory,&ViewTransHistory::sendViewTransHistory,this,&UserInterface::sendViewTransHistory);
+    connect(viewTransHistory,&ViewTransHistory::sendViewTransHistory,this,&UserInterface::viewTransHistoryRequest);
 
     viewTransHistory->exec();
 }

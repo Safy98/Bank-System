@@ -30,7 +30,6 @@ void UpdateUserWindow::responseSuccessfull()
 
 void UpdateUserWindow::responseFailed(int errorState)
 {
-    qInfo()<<errorState<<"errorState";
 
 
     if(errorState  == -1 )
@@ -60,7 +59,6 @@ void UpdateUserWindow::responseFailed(int errorState)
     }
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_fullNameError->setText("Full Name isn't sutible");
         ui->label_fullNameError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -68,10 +66,8 @@ void UpdateUserWindow::responseFailed(int errorState)
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"errorState";
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_userNameError->setText("Username must only contain alphanumeric characters");
         ui->label_userNameError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -79,10 +75,8 @@ void UpdateUserWindow::responseFailed(int errorState)
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"errorState";
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_passwordError->setText("Password must contain Minimum eight characters, at least one letter, one number and one special character");
         ui->label_passwordError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -92,17 +86,14 @@ void UpdateUserWindow::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_confirmPasswordError->setText("Passwords doesn't match");
         ui->label_confirmPasswordError->show();
         ui->pushButton_confirm->setEnabled(true);
     }
     errorState /=10;
-    qInfo()<<errorState<<"after com";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_ageError->setText("User must be +18 ");
         ui->label_ageError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -113,7 +104,6 @@ void UpdateUserWindow::responseFailed(int errorState)
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_accountNumberError->setText("Account Number can't be empty");
         ui->label_accountNumberError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -121,7 +111,6 @@ void UpdateUserWindow::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_accountNumberError->setText("Account Number can only contain 1-7 numerical digits");
         ui->label_accountNumberError->show();
         ui->pushButton_confirm->setEnabled(true);

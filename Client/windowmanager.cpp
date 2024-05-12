@@ -18,62 +18,55 @@ WindowManager::WindowManager(QObject *parent)
 
 void WindowManager::responseReady(QJsonObject Data)
 {
-    qInfo()<<"WindowManager responseReady thread "<<QThread::currentThread();
 
     int responeID = Data.value("ResponseID").toString().toInt();
-    qInfo()<<responeID<<"idddddddddddddddddd";
     switch(responeID)
     {
 
     case -1 :
         if(adminUI!=nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.1";
+            adminUI->responseReady(Data);
 
-            emit responeForAdmin(Data);
 
         }
         else if(userUI!=nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.2";
+            userUI->responseReady(Data);
 
-            emit responeForUser(Data);
+
 
         }
-        else if(w != nullptr)
+        else if(mainWindow != nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.3";
 
-            w->connectedSuccessfully();
+            mainWindow->connectedSuccessfully();
         }
         break;
     case -2:
+
         if(adminUI!=nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.1";
+            adminUI->responseReady(Data);
 
-            emit responeForAdmin(Data);
+
 
         }
         else if(userUI!=nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.2";
-
-            emit responeForUser(Data);
+            userUI->responseReady(Data);
 
         }
-        else if(w != nullptr)
+        else if(mainWindow != nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.3";
 
-            w->disconnected();
+            mainWindow->disconnected();
         }
         break;
     case 0 :
-        qInfo()<<responeID;
+
         if ( (Data.value("State").toBool() ))
         {
-            qInfo()<<responeID<<"1";
 
             if(Data.value("IsAdmin").toBool()  )
             {
@@ -93,10 +86,7 @@ void WindowManager::responseReady(QJsonObject Data)
         }
         else
         {
-            qInfo()<<responeID;
-            qInfo()<<Data.value("Reason").toString().toInt();
-
-            emit failedLoginSignal(Data.value("Reason").toString().toInt());
+            mainWindow->failedLoginSlot(Data.value("Reason").toString().toInt());
         }
 
         break;
@@ -104,27 +94,21 @@ void WindowManager::responseReady(QJsonObject Data)
     case 3:
     case 4:
     case 6:
-        qInfo()<<responeID<<"idddddddddddddddddd1111";
 
-    emit responeForAdmin(Data);
+        adminUI->responseReady(Data);
         break;
     case 2:
     case 5:
     case 7:
-        qInfo()<<responeID<<"idddddddddddddddddd222";
 
         if(adminUI!=nullptr)
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.1";
-
-            emit responeForAdmin(Data);
+            adminUI->responseReady(Data);
 
         }
         else
         {
-            qInfo()<<responeID<<"idddddddddddddddddd222.2";
-
-            emit responeForUser(Data);
+            userUI->responseReady(Data);
 
         }
 
@@ -136,16 +120,14 @@ void WindowManager::responseReady(QJsonObject Data)
     case 10:
     case 11:
     case 12:
-        qInfo()<<responeID<<"idddddddddddddddddd333";
 
-        emit responeForUser(Data);
+        userUI->responseReady(Data);
         break;
 
 
     }
 
 
-    qInfo()<<"responseReady1";
 
 
 
@@ -166,7 +148,6 @@ void WindowManager::requestReady(QJsonObject Data)
 void WindowManager::logout()
 {
     QObject * sender = this->sender();
-    qInfo()<<sender->objectName();
 
     if(sender->objectName() == "AdminInterface")
     {
@@ -185,13 +166,13 @@ void WindowManager::logout()
 
 void WindowManager::createMainUI()
 {
-    w = new MainWindow();
-    connect(w,&MainWindow::WLoginDataAquired,this,&WindowManager::requestReady);
-    connect(this,&WindowManager::failedLoginSignal,w,&MainWindow::failedLoginSlot);
-    connect(w,&MainWindow::connectToTheServer,this,&WindowManager::connectToTheServer);
+    mainWindow = new MainWindow();
+    connect(mainWindow,&MainWindow::WLoginDataAquired,this,&WindowManager::requestReady);
+    // connect(this,&WindowManager::failedLoginSignal,mainWindow,&MainWindow::failedLoginSlot);
+    connect(mainWindow,&MainWindow::connectToTheServer,this,&WindowManager::connectToTheServer);
 
 
-    w->show();
+    mainWindow->show();
 }
 
 void WindowManager::createAdminUI()
@@ -199,8 +180,7 @@ void WindowManager::createAdminUI()
     adminUI = new AdminInterface();
 
 
-    connect(adminUI,&AdminInterface::adminRequest,this,&WindowManager::requestReady);
-    connect(this,&WindowManager::responeForAdmin,adminUI,&AdminInterface::responseReady);
+    connect(adminUI,&AdminInterface::Request,this,&WindowManager::requestReady);
     connect(adminUI,&AdminInterface::logout,this,&WindowManager::logout);
     connect(adminUI,&AdminInterface::connectToTheServer,this,&WindowManager::connectToTheServer);
 
@@ -213,8 +193,7 @@ void WindowManager::createUserUI(QString name)
     userUI = new UserInterface(name);
 
     //connects
-    connect(this,&WindowManager::responeForUser,userUI,&UserInterface::responseReady);
-    connect(userUI,&UserInterface::userRequest,this,&WindowManager::makeRequest);
+    connect(userUI,&UserInterface::Request,this,&WindowManager::makeRequest);
     connect(userUI,&UserInterface::logout,this,&WindowManager::logout);
     connect(userUI,&UserInterface::connectToTheServer,this,&WindowManager::connectToTheServer);
 
@@ -236,13 +215,12 @@ void WindowManager::closeUserUI()
 
 void WindowManager::closeMainUI()
 {
-    delete w;
-    w=nullptr;
+    delete mainWindow;
+    mainWindow=nullptr;
 }
 
 void WindowManager::connectToTheServer()
 {
-    qInfo()<<"clicked1";
     emit requestConnection();
 }
 

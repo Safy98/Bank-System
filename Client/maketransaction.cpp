@@ -59,7 +59,6 @@ void MakeTransaction::responseFailed(int errorState)
     }
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_accountNumError->setText("Account Numbercan't be empty");
         ui->label_accountNumError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -69,7 +68,6 @@ void MakeTransaction::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amoutError->setText("Amount Section   can't be empty");
         ui->label_amoutError->show();
         ui->pushButton_confirm->setEnabled(true);
@@ -79,7 +77,6 @@ void MakeTransaction::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amoutError->setText("amount must be a number and max 1 milion");
         ui->label_amoutError->show();
         ui->pushButton_confirm->setEnabled(true);

@@ -18,7 +18,6 @@ QByteArray requestHandler::handleReaquest(QByteArray request)
 
 
     int processID = requestObj.value("RequestID").toString().toInt();
-    qInfo() << "The process ID is :" << processID;
 
     switch(processID)
     {
@@ -84,8 +83,7 @@ QByteArray requestHandler::handleReaquest(QByteArray request)
         break;
 
 
-    default:
-        response.append(1);
+    
     }
     QJsonDocument docResponse(DB_response);
     response = docResponse.toJson();

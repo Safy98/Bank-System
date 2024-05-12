@@ -23,8 +23,8 @@ public:
     /// @return reference to the singeltong object
     static Client& ClientInstance(QObject *parent = nullptr);
 
-    /// both the copy constructor and the assignment operator
-    //are deleted to surve the purpose of singelton design pattern  
+    // both the copy constructor and the assignment operator
+    //are deleted to surve the purpose of singelton design pattern
     Client(const Client&)=delete;
     void operator =(const Client&)=delete;
 

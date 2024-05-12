@@ -32,7 +32,6 @@ void Server::startServer(qint16 port)
     if(!this->listen(QHostAddress::Any, port))
     {
         ServerLogs->log("Faild to Initialzie server!!");
-        qInfo() << this->errorString();
         return;
     }
     ServerLogs->log ("Listening on port: " + QString::number(port));
@@ -49,7 +48,6 @@ void Server::quitServer()
 
 void Server::incomingConnection(qintptr handle)
 {
-    qInfo()<<"incoming";
     ServerLogs->log("new incoming connection");
     ClientHandler *handler = new ClientHandler(globalMutex,handle,this);
     handler->setAutoDelete(true);

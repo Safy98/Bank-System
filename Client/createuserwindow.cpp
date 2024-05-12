@@ -23,7 +23,6 @@ CreateUserWindow::~CreateUserWindow()
 
 void CreateUserWindow::responseFailed(int errorState)
 {
-    qInfo()<<errorState<<"errorState";
 
 
     if(errorState  == -1 )
@@ -45,7 +44,6 @@ void CreateUserWindow::responseFailed(int errorState)
     }
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_fullNameError->setText("Full Name can't be empty");
         ui->label_fullNameError->show();
 
@@ -53,11 +51,9 @@ void CreateUserWindow::responseFailed(int errorState)
 
     }
      errorState /=10;
-    qInfo()<<errorState<<"errorState";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_userNameError->setText("User Name can't be empty");
         ui->label_userNameError->show();
 
@@ -65,77 +61,63 @@ void CreateUserWindow::responseFailed(int errorState)
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"errorState";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_passwordError->setText("Password can't be empty");
         ui->label_passwordError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"errorState";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_confPasswordError->setText("Please Confirm the Password");
         ui->label_confPasswordError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"errorState";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_userNameError->setText("Username must only contain alphanumeric characters");
         ui->label_userNameError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"after user ,con";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_passwordError->setText("Password must contain Minimum eight characters, at least one letter, one number and one special character");
         ui->label_passwordError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"after pass.con";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_fullNameError->setText("Full Name isn't sutible");
         ui->label_fullNameError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"after not sutable";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_confPasswordError->setText("Passwords doesn't match");
         ui->label_confPasswordError->show();
 
 
     }
     errorState /=10;
-    qInfo()<<errorState<<"after com";
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_ageError->setText("User must be +18 ");
         ui->label_ageError->show();
 
@@ -178,7 +160,6 @@ void CreateUserWindow::on_pushButton_clicked()
     ui->label_confPasswordError->hide();
 
     emit createUserRequest(fullName,age,userName,password,confPassword,isAdmin);
-    qInfo()<<"confirm";
 }
 
 

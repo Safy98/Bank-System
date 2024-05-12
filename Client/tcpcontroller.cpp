@@ -16,26 +16,25 @@ TcpController::TcpController(QObject *parent)
 
 }
 
+TcpController::~TcpController()
+{
+    delete socket;
+}
+
 void TcpController::makeTcpRequest(QByteArray request)
 {
-    qInfo()<<"tcp thread "<<QThread::currentThread();
 
     //check if connected
     if(socket->state() == QAbstractSocket::ConnectedState){
         socket->write(request);
         socket->waitForBytesWritten();
     }
-    qInfo()<<QThread::currentThread();
-    qInfo()<<"hi";
-    qInfo()<<QThread::currentThread();
+    
 
 }
 
 void TcpController::makeConnection()
 {
-    qInfo()<<"clicked2";
-
-    qInfo()<<QThread::currentThread();
 
     socket->connectToHost("127.0.0.1",2222);
 }
@@ -44,13 +43,11 @@ void TcpController::closeConnection()
 {
     if(socket->isOpen())
     {
-        qInfo()<<"clicked3";
 
         socket->disconnectFromHost();
         socket->waitForDisconnected(500);
 
     }
-    qInfo()<<QThread::currentThread();
 
 }
 
@@ -59,21 +56,18 @@ void TcpController::readyRead()
     QByteArray response =socket->readAll();
 
     emit ResponseReady(response);
-    qInfo()<<QThread::currentThread();
 
 }
 
 void TcpController::connected()
 {
     qInfo()<<"connected";
-    qInfo()<<QThread::currentThread();
 
 }
 
 void TcpController::disconnected()
 {
     qInfo()<<"disconnected";
-    qInfo()<<QThread::currentThread();
 
     // emit disconnectedSignal();
 
@@ -102,7 +96,6 @@ void TcpController::stateChanged(QAbstractSocket::SocketState socketState)
     }
     else if(socketState == QAbstractSocket::UnconnectedState)
     {
-        qInfo()<<"hi";
         emit disconnectedSignal();
 
     }

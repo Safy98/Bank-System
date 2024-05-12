@@ -25,6 +25,7 @@ void ViewTransHistory::responseSuccessfull(QJsonObject data)
 
     for(int  i = 0  ; i <count ; i++)
     {
+        // the tableWidget takes ownership of this alocations and will delete them on his own
         ui->tableWidget->setItem(i,0,new QTableWidgetItem(arr.at(i).toObject().value("Type").toString()));
         ui->tableWidget->setItem(i,1,new QTableWidgetItem(arr.at(i).toObject().value("Amount").toString()));
         ui->tableWidget->setItem(i,2,new QTableWidgetItem(arr.at(i).toObject().value("date").toString()));
@@ -62,7 +63,6 @@ void ViewTransHistory::responseFailed(int errorState)
     }
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_AccountNumError->setText("Account Number can't be empty");
         ui->label_AccountNumError->show();
 
@@ -71,7 +71,6 @@ void ViewTransHistory::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_coutError->setText("Count can't be empty");
         ui->label_coutError->show();
 
@@ -81,7 +80,6 @@ void ViewTransHistory::responseFailed(int errorState)
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_coutError->setText("Count can only be positive none zero value");
         ui->label_coutError->show();
 
@@ -90,7 +88,6 @@ void ViewTransHistory::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_AccountNumError->setText("Account Number can only contain 1-7  numerical values digits");
         ui->label_AccountNumError->show();
 

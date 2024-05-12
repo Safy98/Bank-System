@@ -1,9 +1,9 @@
 #include "admininterface.h"
 #include "ui_admininterface.h"
 
-AdminInterface::AdminInterface(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::AdminInterface)
+AdminInterface::AdminInterface(IUser * parent)
+    :IUser (parent)
+    ,ui(new Ui::AdminInterface)
 {
     ui->setupUi(this);
     ui->pushButton_connectState->setStyleSheet("QPushButton{height:40px; background-color:green ;}");
@@ -16,13 +16,7 @@ AdminInterface::~AdminInterface()
 
 void AdminInterface::on_pbCreateUser_clicked()
 {
-     createUserWindow = new CreateUserWindow(this);
-    qInfo()<<createUserWindow<<"createwidnpw pointer";
-    connect(createUserWindow,&CreateUserWindow::createUserRequest,this,&AdminInterface::createUserRequest);
-     connect(createUserWindow,&CreateUserWindow::backPressed,this,&AdminInterface::backPressed);
-    qInfo()<<"hi create1";
-    createUserWindow->exec();
-    qInfo()<<"hi create2";
+    createCreateUserUI();
 }
 
 void AdminInterface::createUserRequest(QString fullName, int age, QString userName, QString password, QString confPassword, bool isAdmin)
@@ -37,7 +31,7 @@ void AdminInterface::createUserRequest(QString fullName, int age, QString userNa
     request["ConfPassword"]=confPassword;
     request["IsAdmin"]=isAdmin;
 
-    emit adminRequest(request);
+    emit Request(request);
 
 
 }
@@ -48,7 +42,7 @@ void AdminInterface::getAccountNumberRequest(QString username)
     request["RequestID"]="2";
     request["UserName"]=username;
 
-    emit adminRequest(request);
+    emit Request(request);
 
 
 
@@ -60,7 +54,7 @@ void AdminInterface::deleteUserRequest(QString accountNumber)
     QJsonObject request;
     request["RequestID"]="3";
     request["AccountNumber"]=accountNumber;
-    emit adminRequest(request);
+    emit Request(request);
 }
 
 void AdminInterface::updateUserRequest(QString accountNumber,QString fullName, int age, QString userName, QString password, QString confPassword, bool isAdmind)
@@ -76,11 +70,11 @@ void AdminInterface::updateUserRequest(QString accountNumber,QString fullName, i
     request["ConfPassword"]=confPassword;
     request["IsAdmind"]=isAdmind;
 
-    emit adminRequest(request);
+    emit Request(request);
 
 }
 
-void AdminInterface::sendViewTransHistory(QString accountNumber, QString count)
+void AdminInterface::viewTransHistoryRequest(QString accountNumber, QString count)
 {
     QJsonObject request;
     request["RequestID"]="5";
@@ -88,17 +82,17 @@ void AdminInterface::sendViewTransHistory(QString accountNumber, QString count)
     request["Count"]=count;
 
 
-    emit adminRequest(request);
+    emit Request(request);
 
 }
 
-void AdminInterface::GetAccountBalance(QString accountNumber)
+void AdminInterface::getAccountBalanceRequest(QString accountNumber)
 {
     QJsonObject request;
     request["RequestID"]="7";
     request["AccountNumber"]=accountNumber;
 
-    emit adminRequest(request);
+    emit Request(request);
 
 
 }
@@ -106,7 +100,6 @@ void AdminInterface::GetAccountBalance(QString accountNumber)
 void AdminInterface::responseReady(QJsonObject response)
 {
     int id = response.value("ResponseID").toString().toInt();
-    qInfo()<<"creaaaaate respooonse id"<<id;
     switch(id)
     {
 
@@ -138,7 +131,6 @@ void AdminInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             accountNumberWindow->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -151,7 +143,6 @@ void AdminInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             deleteUserWindow->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -164,7 +155,6 @@ void AdminInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             updateUserWindow->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -179,7 +169,6 @@ void AdminInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             viewTransHistory->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -213,7 +202,6 @@ void AdminInterface::responseReady(QJsonObject response)
         }
         else
         {
-            qInfo()<<"falsaasdad";
             getAccountBalanceWindow->responseFailed(response.value("Reason").toString().toInt());
 
         }
@@ -223,6 +211,8 @@ void AdminInterface::responseReady(QJsonObject response)
     }
 }
 
+
+/// @brief checks the sender ui and deletes it from the heap
 void AdminInterface::backPressed()
 {
     QObject * sender =  this->sender();
@@ -235,26 +225,60 @@ void AdminInterface::createTransHistoryUI()
 
     //connects
     connect(viewTransHistory,&ViewTransHistory::backPressed,this,&AdminInterface::backPressed);
-    connect(viewTransHistory,&ViewTransHistory::sendViewTransHistory,this,&AdminInterface::sendViewTransHistory);
+    connect(viewTransHistory,&ViewTransHistory::sendViewTransHistory,this,&AdminInterface::viewTransHistoryRequest);
 
     viewTransHistory->exec();
+}
+
+void AdminInterface::createCreateUserUI()
+{
+    createUserWindow = new CreateUserWindow(this);
+    connect(createUserWindow,&CreateUserWindow::createUserRequest,this,&AdminInterface::createUserRequest);
+    connect(createUserWindow,&CreateUserWindow::backPressed,this,&AdminInterface::backPressed);
+    createUserWindow->exec();
+}
+
+void AdminInterface::createUpdateUserUI()
+{
+    updateUserWindow = new UpdateUserWindow(this);
+    connect(updateUserWindow,&UpdateUserWindow::backPressed,this,&AdminInterface::backPressed);
+    connect(updateUserWindow,&UpdateUserWindow::updateUserRequest,this,&AdminInterface::updateUserRequest);
+
+
+    updateUserWindow->exec();
+}
+
+void AdminInterface::createDeleteUserUI()
+{
+    deleteUserWindow = new DeleteUserWindow(this);
+    connect(deleteUserWindow,&DeleteUserWindow::backPressed,this,&AdminInterface::backPressed);
+    connect(deleteUserWindow,&DeleteUserWindow::deleteUserRequest,this,&AdminInterface::deleteUserRequest);
+    deleteUserWindow->exec();
 }
 
 void AdminInterface::createViewDBUI()
 {
     viewDBWindow = new ViewDB(this);
 
-    //connects
     connect(viewDBWindow,&ViewDB::backPressed,this,&AdminInterface::backPressed);
 
-    // viewDBWindow->exec();
+    // the window will be shown by the adminobject if the database is available
 }
 
 void AdminInterface::createGetAccNumUI()
 {
+    accountNumberWindow = new AgetAccountNumWindow(this);
+    connect(accountNumberWindow,&AgetAccountNumWindow::backPressed,this,&AdminInterface::backPressed);
+    connect(accountNumberWindow,&AgetAccountNumWindow::getAccountNumberRequest,this,&AdminInterface::getAccountNumberRequest);
+
+    accountNumberWindow->exec();
+}
+
+void AdminInterface::createGetAccBalanceUI()
+{
     getAccountBalanceWindow = new GetAccBalance(this);
     connect(getAccountBalanceWindow,&GetAccBalance::backPressed,this,&AdminInterface::backPressed);
-    connect(getAccountBalanceWindow,&GetAccBalance::GetAccountBalance,this,&AdminInterface::GetAccountBalance);
+    connect(getAccountBalanceWindow,&GetAccBalance::GetAccountBalance,this,&AdminInterface::getAccountBalanceRequest);
 
 
     getAccountBalanceWindow->exec();
@@ -265,6 +289,13 @@ void AdminInterface::connectedSuccessfully()
     ui->pushButton_connectState->setText("Connected");
     ui->pushButton_connectState->setStyleSheet("QPushButton{height:40px; background-color:green ;}");
     ui->pushButton_connectState->setEnabled(false);
+    ui->pbCreateUser->setEnabled(true);
+    ui->pbDeleteeUser->setEnabled(true);
+    ui->pbUpdateUser->setEnabled(true);
+    ui->pbGetAccountBalance->setEnabled(true);
+    ui->pbGetAccountNum->setEnabled(true);
+    ui->pbViewDB->setEnabled(true);
+    ui->pbViewTransHistory->setEnabled(true);
 }
 
 void AdminInterface::disconnected()
@@ -273,38 +304,35 @@ void AdminInterface::disconnected()
     ui->pushButton_connectState->setText("Reconnect");
     ui->pushButton_connectState->setStyleSheet("QPushButton{height:40px; background-color:red ;}");
     ui->pushButton_connectState->setEnabled(true);
+    ui->pbCreateUser->setEnabled(false);
+    ui->pbDeleteeUser->setEnabled(false);
+    ui->pbUpdateUser->setEnabled(false);
+    ui->pbGetAccountBalance->setEnabled(false);
+    ui->pbGetAccountNum->setEnabled(false);
+    ui->pbViewDB->setEnabled(false);
+    ui->pbViewTransHistory->setEnabled(false);
+
 
 }
 
 
 void AdminInterface::on_pbGetAccountNum_clicked()
 {
-    accountNumberWindow = new AgetAccountNumWindow(this);
-    connect(accountNumberWindow,&AgetAccountNumWindow::backPressed,this,&AdminInterface::backPressed);
-    connect(accountNumberWindow,&AgetAccountNumWindow::getAccountNumberRequest,this,&AdminInterface::getAccountNumberRequest);
+    createGetAccNumUI();
 
-    accountNumberWindow->exec();
 }
 
 
 void AdminInterface::on_pbDeleteeUser_clicked()
 {
-    deleteUserWindow = new DeleteUserWindow(this);
-    connect(deleteUserWindow,&DeleteUserWindow::backPressed,this,&AdminInterface::backPressed);
-    connect(deleteUserWindow,&DeleteUserWindow::deleteUserRequest,this,&AdminInterface::deleteUserRequest);
-    deleteUserWindow->exec();
+    createDeleteUserUI();
 
 }
 
 
 void AdminInterface::on_pbUpdateUser_clicked()
 {
-    updateUserWindow = new UpdateUserWindow(this);
-    connect(updateUserWindow,&UpdateUserWindow::backPressed,this,&AdminInterface::backPressed);
-    connect(updateUserWindow,&UpdateUserWindow::updateUserRequest,this,&AdminInterface::updateUserRequest);
-
-
-    updateUserWindow->exec();
+   createUpdateUserUI();
 }
 
 
@@ -327,13 +355,13 @@ void AdminInterface::on_pbViewDB_clicked()
 
 
 
-    emit adminRequest(request);
+    emit Request(request);
 }
 
 
 void AdminInterface::on_pbGetAccountBalance_clicked()
 {
-    createGetAccNumUI();
+    createGetAccBalanceUI();
 }
 
 

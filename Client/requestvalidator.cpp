@@ -73,7 +73,6 @@ int RequestValidator::validateRequest(const QJsonObject &request) const
 
 
 
-    qInfo()<<validationState;
     return validationState;
 }
 
@@ -83,8 +82,7 @@ int RequestValidator::validateLogin(const QString& username, const QString &pass
 
 
 
-    qInfo()<<"from vali"<<username;
-    qInfo()<<password;
+    
 
     if(username.isEmpty())
     {
@@ -103,7 +101,6 @@ int RequestValidator::validateLogin(const QString& username, const QString &pass
         errorState+=1000;
     }
 
-    qInfo()<<errorState<<"errorState";
 
     return errorState;
 
@@ -149,7 +146,6 @@ int RequestValidator::validateCreateUser(const QString &fullName ,const int &age
         errorState+=100000000;
     }
 
-    qInfo()<<errorState<<"errorState";
 
 
 
@@ -236,7 +232,6 @@ int RequestValidator::validateUpdateUser(const QString &accountNumber,const QStr
         errorState+=1000000;
     }
 
-    qInfo()<<errorState<<"errorState";
 
 
 

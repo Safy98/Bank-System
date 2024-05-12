@@ -13,8 +13,7 @@ ClientHandler::~ClientHandler()
 
     ClientLogs->log("socket has disconnected..");
     ClientLogs->log("ClientHandler is deleted");
-    qInfo()<<"socket has disconnected..";
-    qInfo()<<"ClientHandler is deleted";
+    
     delete socket;
     delete l_handler;
 
@@ -29,7 +28,6 @@ void ClientHandler::disconnected()
 void ClientHandler::readyRead()
 {
     QByteArray data = socket->readAll();
-    qInfo()<<QString::fromUtf8(data);
 
     //syncronus call that reaches the DataBase
     QByteArray l_response = l_handler->handleReaquest(data);
@@ -52,7 +50,6 @@ void ClientHandler::run()
     if(!socket->setSocketDescriptor(m_socketDescriptor))
     {
         ClientLogs->log("Failed to connect to the client ");
-        qCritical() << socket->errorString();
         ClientLogs->log(socket->errorString());
 
         delete socket;
@@ -71,7 +68,6 @@ void ClientHandler::run()
 
     // to read the data from the socket buffer when it's ready
     connect(socket, &QTcpSocket::readyRead, this, &ClientHandler::readyRead, Qt::DirectConnection);
-    qInfo() << QThread::currentThread();
 
 
 

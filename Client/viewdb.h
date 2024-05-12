@@ -13,9 +13,9 @@ class ViewDB : public QDialog
 
 public:
     explicit ViewDB(QWidget *parent = nullptr);
+    ~ViewDB();
 
    void responseSuccessfull(QJsonObject);
-    ~ViewDB();
 signals:
     void backPressed(void);
 private slots:

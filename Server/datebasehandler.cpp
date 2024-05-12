@@ -150,7 +150,6 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     jResponse["Name"] = obj.value(data.value("UserName").toString()).toObject().value("FullName").toString();
 
     DBLogger->log("User: " + data.value("UserName").toString() + " has logged in successfully.");
-    qInfo() << "User: " + data.value("UserName").toString() + " has logged in successfully.";
 
     return jResponse;
 }
@@ -844,7 +843,6 @@ QJsonObject DataBasaHandler::createUser(QJsonObject data)
     stream << QString::fromUtf8(writableDoc.toJson(QJsonDocument::Indented));
     DataBaseFile->close();
 
-    qInfo() << "User added successfully!";
     jResponse["State"] = true;
     jResponse["Reason"] = "0";
 

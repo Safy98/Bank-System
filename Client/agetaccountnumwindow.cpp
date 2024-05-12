@@ -29,7 +29,6 @@ void AgetAccountNumWindow::responseSuccessfull(int accountNumber)
 
 void AgetAccountNumWindow::responseFailed(int errorState)
 {
-        qInfo()<<errorState<<"response get failed";
     if(errorState == 10)
     {
 

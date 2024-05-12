@@ -46,6 +46,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         viewdb.h viewdb.cpp viewdb.ui
         getaccbalance.h getaccbalance.cpp getaccbalance.ui
         maketransfer.h maketransfer.cpp maketransfer.ui
+        iuser.h iuser.cpp
 
 
 

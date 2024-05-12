@@ -65,7 +65,6 @@ void MakeTransfer::responseFailed(int errorState)
 
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_senderAccNummError->setText("Account Numbercan't be empty");
         ui->label_senderAccNummError->show();
 
@@ -75,7 +74,6 @@ void MakeTransfer::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_reciverAccNummError->setText("Account Numbercan't be empty");
         ui->label_reciverAccNummError->show();
 
@@ -85,7 +83,6 @@ void MakeTransfer::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amountError->setText("Amount most be positive value ");
         ui->label_amountError->show();
 
@@ -103,7 +100,6 @@ void MakeTransfer::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amountError->setText("Account Number can only contain 1-7 numerical digits");
         ui->label_amountError->show();
 
@@ -113,7 +109,6 @@ void MakeTransfer::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amountError->setText("Account Number can only contain 1-7 numerical digits ");
         ui->label_amountError->show();
 
@@ -123,7 +118,6 @@ void MakeTransfer::responseFailed(int errorState)
     errorState /=10;
     if((errorState % 2) == 1 )
     {
-        qInfo()<<"hi";
         ui->label_amountError->setText("amount must be a number and max 1 milion");
         ui->label_amountError->show();
 

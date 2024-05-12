@@ -61,7 +61,6 @@ void AccountController::retriveResponse(QByteArray response)
     QJsonDocument responseDoc = QJsonDocument::fromJson(response);
 
     QJsonObject responseobj = responseDoc.object();
-    qInfo()<<QThread::currentThread();
 
     // this signal invokes the responseReady slot in the windowManger object
     emit sendResponseBack(responseobj);
@@ -95,7 +94,6 @@ void AccountController::disconnectedSignal()
 {
     QJsonObject response;
     response["ResponseID"]="-2";
-    qInfo()<<QThread::currentThread();
     // this signal invokes the responseReady slot in the windowManger object
     emit sendResponseBack(response);
 
