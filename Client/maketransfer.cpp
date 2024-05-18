@@ -9,6 +9,8 @@ MakeTransfer::MakeTransfer(QWidget *parent)
     ui->label_amountError->hide();
     ui->label_reciverAccNummError->hide();
     ui->label_senderAccNummError->hide();
+    setWindowFlag(Qt::FramelessWindowHint);
+
 }
 
 MakeTransfer::~MakeTransfer()

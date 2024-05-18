@@ -23,7 +23,7 @@ class AdminInterface : public IUser
     Q_OBJECT
 
 public:
-    explicit AdminInterface(IUser * parent = nullptr);
+    explicit AdminInterface(QString ip,IUser * parent = nullptr);
     ~AdminInterface();
 
 public slots:
@@ -80,6 +80,8 @@ private:
     ViewTransHistory *viewTransHistory;
     ViewDB *viewDBWindow;
     GetAccBalance *getAccountBalanceWindow;
+    QString serverIP;
+
 
     // IUser interface
 protected slots:

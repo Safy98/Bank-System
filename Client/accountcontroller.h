@@ -29,8 +29,8 @@ public slots:
     void retriveResponse(QByteArray response);
 
     //invoked by the windowManger signal with the same name, uses theTcpController object to establis
-    // connection  to the server 
-    void requestConnection();
+    // connection  to the server
+    void requestConnection(QString ip);
 
     //invoked by the windowManger signal with the same name, uses theTcpController object to 
     // disconnect from the server 

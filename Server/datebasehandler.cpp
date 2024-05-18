@@ -1,12 +1,12 @@
 #include "datebasehandler.h"
-
+#include <QCoreApplication>
 
 
 /// @brief Private constructor since this class is singleton
 DataBasaHandler::DataBasaHandler()
 {
     
-    DataBaseFile = new QFile("../../DataBase/myDataBase.json");
+    DataBaseFile = new QFile("myDataBase.json");
     DBLogger = new Logger("./dbLogger.log");
 
     initilaize();
@@ -74,7 +74,7 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     if (!DataBaseFile->exists())
     {
         DBLogger->log("Database file doesn't exist.");
-        qCritical() << "Database file doesn't exist.";
+        // qCritical() << "Database file doesn't exist.";
 
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -87,7 +87,7 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     {
 
         DBLogger->log("Failed to open database file for reading.");
-        qCritical() << "Failed to open database file for reading.";
+        // qCritical() << "Failed to open database file for reading.";
         DataBaseFile->close();
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -102,7 +102,7 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     if (jError.error != QJsonParseError::NoError)
     {
 
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -119,7 +119,7 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     // Check if the user exists in the database
     if (!obj.contains(data.value("UserName").toString()))
     {
-        qCritical() << "User not found.";
+        // qCritical() << "User not found.";
         DBLogger->log("User not found.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-1";
@@ -133,7 +133,7 @@ QJsonObject DataBasaHandler::logIn(QJsonObject data)
     QString userPass = obj.value(data.value("UserName").toString()).toObject().value("Password").toString();
     if (data.value("Password").toString() != userPass)
     {
-        qCritical() << "Incorrect password.";
+        // qCritical() << "Incorrect password.";
         DBLogger->log("Incorrect password.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
@@ -172,7 +172,7 @@ QJsonObject DataBasaHandler::getAccount_Number(QJsonObject data)
 
 
         DBLogger->log("Failed to open database file for reading.");
-        qCritical() << "Failed to open database file for reading.";
+        // qCritical() << "Failed to open database file for reading.";
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
 
@@ -187,7 +187,7 @@ QJsonObject DataBasaHandler::getAccount_Number(QJsonObject data)
     {
 
         qCritical() << "Failed to parse JSON:" << jError.errorString();
-        DBLogger->log("Failed to parse JSON.");
+        // DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
         return jResponse;
@@ -198,7 +198,7 @@ QJsonObject DataBasaHandler::getAccount_Number(QJsonObject data)
     // Check if the user exists in the database
     if(obj.value(data.value("UserName").toString()) == QJsonValue::Undefined)
     {
-        qCritical() << "User not found.";
+        // qCritical() << "User not found.";
         DBLogger->log("User not found.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-1";
@@ -229,7 +229,7 @@ QJsonObject DataBasaHandler::viewAccount_Balance(QJsonObject data)
     {
 
 
-        qCritical() << "Can't open database file.";
+        // qCritical() << "Can't open database file.";
         DBLogger->log("Can't open database file.");
         DataBaseFile->close();
         jResponse["State"] = false;
@@ -245,7 +245,7 @@ QJsonObject DataBasaHandler::viewAccount_Balance(QJsonObject data)
     {
 
 
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
@@ -308,7 +308,7 @@ QJsonObject DataBasaHandler::viewTransaction_History(QJsonObject data)
     {
 
 
-        qCritical() << "Can't open database file.";
+        // qCritical() << "Can't open database file.";
         DBLogger->log("Can't open database file.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -323,7 +323,7 @@ QJsonObject DataBasaHandler::viewTransaction_History(QJsonObject data)
     if (jError.error != QJsonParseError::NoError)
     {
 
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -393,7 +393,6 @@ QJsonObject DataBasaHandler::viewTransaction_History(QJsonObject data)
     jResponse["State"] = false;
     jResponse["Reason"] = "-1";
 
-    qDebug() << "User" << data.value("UserName").toString() << "user not found";
     DBLogger->log("User: " + data.value("AccountNumber").toString() + "  not found in  JSON DataBase successfully.");
     return jResponse;
 
@@ -416,7 +415,7 @@ QJsonObject DataBasaHandler::makeTransaction(QJsonObject data)
     if(!(DataBaseFile->open(QIODevice::ReadOnly | QIODevice::Text)))
     {
 
-        qCritical() << "Can't open database file.";
+        // qCritical() << "Can't open database file.";
         DBLogger->log("Can't open database file.");
         DataBaseFile->close();
         jResponse["State"] = false;
@@ -527,7 +526,7 @@ QJsonObject DataBasaHandler::makeTransaction(QJsonObject data)
         if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
         {
 
-            qCritical() << "Failed to open file for reading and writing.";
+            // qCritical() << "Failed to open file for reading and writing.";
             jResponse["State"] = false;
             jResponse["Reason"] = "-3";
             DataBaseFile->close();
@@ -554,7 +553,7 @@ QJsonObject DataBasaHandler::makeTransaction(QJsonObject data)
     //user not found
     jResponse["State"] = false;
     jResponse["Reason"] = "-1";
-    qDebug() << "User" << data.value("UserName").toString() << "user not found";
+    // qDebug() << "User" << data.value("UserName").toString() << "user not found";
     DBLogger->log("User: " + data.value("AccountNumber").toString() + "  not found in  JSON DataBase successfully.");
 
     return jResponse;
@@ -576,7 +575,7 @@ QJsonObject DataBasaHandler::transferAmount(QJsonObject data)
      // Open the database file for reading
     if(!(DataBaseFile->open(QIODevice::ReadOnly | QIODevice::Text)))
     {
-        qCritical() << "Can't open database file.";
+        // qCritical() << "Can't open database file.";
         DBLogger->log("Can't open database file.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -591,7 +590,7 @@ QJsonObject DataBasaHandler::transferAmount(QJsonObject data)
     //parse the read data
     if (jError.error != QJsonParseError::NoError)
     {
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-3";
@@ -717,7 +716,7 @@ QJsonObject DataBasaHandler::viewBankDB()
     if (jError.error != QJsonParseError::NoError)
     {
 
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON.");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
@@ -753,7 +752,7 @@ QJsonObject DataBasaHandler::createUser(QJsonObject data)
     // Open the database file
     if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        qCritical() << "Can't open database file!";
+        // qCritical() << "Can't open database file!";
         DBLogger->log("Can't open database file!");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
@@ -765,7 +764,7 @@ QJsonObject DataBasaHandler::createUser(QJsonObject data)
     QJsonDocument doc = QJsonDocument::fromJson(DataBaseFile->readAll(), &jError);
     if (jError.error != QJsonParseError::NoError)
     {
-        qCritical() << "Failed to parse JSON:" << jError.errorString();
+        // qCritical() << "Failed to parse JSON:" << jError.errorString();
         DBLogger->log("Failed to parse JSON:");
         DataBaseFile->close();
         jResponse["State"] = false;
@@ -785,32 +784,33 @@ QJsonObject DataBasaHandler::createUser(QJsonObject data)
         return jResponse;
 
     }
-    bool flag = false;
+    bool flag;
+    int accountNum =  randomNumGen.bounded(1,1000);
 
-   int accountNum =  randomNumGen.bounded(1,1000);
     QStringList list = jsonObj.keys();
-    foreach (QString key, list) {
-        int number =  jsonObj.value(key).toObject().value("AccountNumber").toString().toInt();
-        if(number != accountNum)
-        {
+    while(1)
+    {
+         accountNum =  randomNumGen.bounded(1,1000);
+        flag = false;
+        foreach (QString key, list) {
+            int number =  jsonObj.value(key).toObject().value("AccountNumber").toString().toInt();
+            if(number == accountNum)
+            {
 
-            flag=true;
+                flag=true;
+                break;
+            }
+
+
+        }
+        if(!flag)
+        {
             break;
         }
-        else
-        {
-            accountNum =  randomNumGen.bounded(1,1000);
 
-        }
     }
 
-    if (!flag)
-    {
-        jResponse["State"] = false;
-        jResponse["Reason"] = "-1";
 
-        return jResponse;
-    }
 
 
 
@@ -830,7 +830,7 @@ QJsonObject DataBasaHandler::createUser(QJsonObject data)
     // Open the database file again for writing
     if (!DataBaseFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
     {
-        qCritical() << "Can't open database file!";
+        // qCritical() << "Can't open database file!";
         DBLogger->log("Can't open database file!");
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
@@ -857,7 +857,7 @@ QJsonObject DataBasaHandler::deleteUser(QJsonObject data)
 
     if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        qCritical() << "Failed to open file for reading and writing.";
+        // qCritical() << "Failed to open file for reading and writing.";
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
         DataBaseFile->close();
@@ -873,7 +873,7 @@ QJsonObject DataBasaHandler::deleteUser(QJsonObject data)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
     if (error.error != QJsonParseError::NoError)
     {
-        qCritical() << "Failed to parse JSON:" << error.errorString();
+        // qCritical() << "Failed to parse JSON:" << error.errorString();
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
         DataBaseFile->close();
@@ -898,7 +898,7 @@ QJsonObject DataBasaHandler::deleteUser(QJsonObject data)
         // Write the modified JSON back to the file
         if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
         {
-            qCritical() << "Failed to open file for reading and writing.";
+            // qCritical() << "Failed to open file for reading and writing.";
             jResponse["State"] = false;
             jResponse["Reason"] = "-2";
             DataBaseFile->close();
@@ -912,7 +912,7 @@ QJsonObject DataBasaHandler::deleteUser(QJsonObject data)
 
         jResponse["State"] = true;
         jResponse["Reason"] = "0";
-        qDebug() << "User" << data.value("UserName").toString() << "deleted from JSON file successfully.";
+        // qDebug() << "User" << data.value("UserName").toString() << "deleted from JSON file successfully.";
         // DBLogger->log("User: " + data.value("UserName").toString() + " deleted from JSON file successfully.");
         return jResponse;
 
@@ -920,7 +920,7 @@ QJsonObject DataBasaHandler::deleteUser(QJsonObject data)
 
     jResponse["State"] = false;
     jResponse["Reason"] = "-1";
-    qDebug() << "User" << data.value("UserName").toString() << "user not found";
+    // qDebug() << "User" << data.value("UserName").toString() << "user not found";
     DBLogger->log("User: " + data.value("AccountNumber").toString() + "  not found in  JSON DataBase successfully.");
     return jResponse;
 
@@ -935,7 +935,7 @@ QJsonObject DataBasaHandler::updateUser(QJsonObject data)
 
     if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        qCritical() << "Failed to open file for reading and writing.";
+        // qCritical() << "Failed to open file for reading and writing.";
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
         DataBaseFile->close();
@@ -951,7 +951,7 @@ QJsonObject DataBasaHandler::updateUser(QJsonObject data)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
     if (error.error != QJsonParseError::NoError)
     {
-        qCritical() << "Failed to parse JSON:" << error.errorString();
+        // qCritical() << "Failed to parse JSON:" << error.errorString();
         jResponse["State"] = false;
         jResponse["Reason"] = "-2";
         DataBaseFile->close();
@@ -1003,7 +1003,7 @@ QJsonObject DataBasaHandler::updateUser(QJsonObject data)
             {
                 jResponse["State"] = false;
                 jResponse["Reason"] = "-3";
-                qDebug() << "User" << data.value("UserName").toString() << "user name reserved ";
+                // qDebug() << "User" << data.value("UserName").toString() << "user name reserved ";
                 DBLogger->log("User: " + data.value("AccountNumber").toString() + "  nuser name reserved in  JSON DataBase successfully.");
                 return jResponse;
             }
@@ -1025,7 +1025,7 @@ QJsonObject DataBasaHandler::updateUser(QJsonObject data)
         // Write the modified JSON back to the file
         if (!DataBaseFile->open(QIODevice::ReadWrite | QIODevice::Text))
         {
-            qCritical() << "Failed to open file for reading and writing.";
+            // qCritical() << "Failed to open file for reading and writing.";
             jResponse["State"] = false;
             jResponse["Reason"] = "-2";
             DataBaseFile->close();
@@ -1039,14 +1039,14 @@ QJsonObject DataBasaHandler::updateUser(QJsonObject data)
 
         jResponse["State"] = true;
         jResponse["Reason"] = "0";
-        qDebug() << "User" << data.value("UserName").toString() << "user updated successfully ";
+        // qDebug() << "User" << data.value("UserName").toString() << "user updated successfully ";
         DBLogger->log("User: " + data.value("AccountNumber").toString() + "  user updated in JSON DataBase successfully.");
         return jResponse;
     }
 
     jResponse["State"] = false;
     jResponse["Reason"] = "-1";
-    qDebug() << "User" << data.value("UserName").toString() << "user not found";
+    // qDebug() << "User" << data.value("UserName").toString() << "user not found";
     DBLogger->log("User: " + data.value("AccountNumber").toString() + "  not found in  JSON DataBase successfully.");
     return jResponse;
 

@@ -33,10 +33,10 @@ void TcpController::makeTcpRequest(QByteArray request)
 
 }
 
-void TcpController::makeConnection()
+void TcpController::makeConnection(QString ip)
 {
 
-    socket->connectToHost("127.0.0.1",2222);
+    socket->connectToHost(ip,2222);
 }
 
 void TcpController::closeConnection()

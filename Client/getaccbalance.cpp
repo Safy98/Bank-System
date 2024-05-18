@@ -7,6 +7,9 @@ GetAccBalance::GetAccBalance(QWidget *parent)
 {
     ui->setupUi(this);
     ui->label_accNumError->hide();
+    setWindowFlags( Qt::Tool );
+    setWindowFlag(Qt::FramelessWindowHint);
+
 }
 
 GetAccBalance::~GetAccBalance()

@@ -8,6 +8,7 @@ AgetAccountNumWindow::AgetAccountNumWindow(QWidget *parent)
     ui->setupUi(this);
     ui->label_error->hide();
     ui->label_result->setText("Account Number : ");
+    setWindowFlag(Qt::FramelessWindowHint);
 
 }
 

@@ -21,7 +21,7 @@ public:
 
 signals:
     void makeRequest(QJsonObject Data);
-    void requestConnection();
+    void requestConnection(QString ip);
     void requestDisconnection();
 
 private:
@@ -29,6 +29,7 @@ private:
     MainWindow * mainWindow ;
     AdminInterface * adminUI;
     UserInterface * userUI;
+    QString serverIP;
 
 
 public slots:
@@ -49,7 +50,7 @@ public slots:
     void closeUserUI(void);
     void closeMainUI(void);
 
-    void connectToTheServer();
+    void connectToTheServer(QString ip);
 
 private slots:
 

@@ -28,6 +28,7 @@ add_executable(ThreadedServer
 
 
 
+
 )
 target_link_libraries(ThreadedServer Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network)
 

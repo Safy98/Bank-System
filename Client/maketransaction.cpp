@@ -8,6 +8,7 @@ MakeTransaction::MakeTransaction(QWidget *parent)
     ui->setupUi(this);
     ui->label_amoutError->hide();
     ui->label_accountNumError->hide();
+    setWindowFlag(Qt::FramelessWindowHint);
 
 
 }

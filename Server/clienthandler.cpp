@@ -13,6 +13,8 @@ ClientHandler::~ClientHandler()
 
     ClientLogs->log("socket has disconnected..");
     ClientLogs->log("ClientHandler is deleted");
+    qInfo()<<"the client: "<<m_socketDescriptor<<" has disconnected ";
+
     
     delete socket;
     delete l_handler;
@@ -56,6 +58,7 @@ void ClientHandler::run()
         return;
     }
 
+    qInfo()<<"serving the client: "<<m_socketDescriptor<<" on:  "<<QThread::currentThread();
     /*we use Qt::DirectConnection when we connect signals and slots to
     ensure that slots will be invoked in the singling thread.*/
 

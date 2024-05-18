@@ -13,7 +13,7 @@ public:
     ~TcpController();
 
     void makeTcpRequest(QByteArray request);
-    void makeConnection();
+    void makeConnection(QString ip);
     void closeConnection();
 
 signals:

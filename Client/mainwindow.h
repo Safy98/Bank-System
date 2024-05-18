@@ -26,7 +26,7 @@ public slots:
 signals:
     void WLoginDataAquired(QJsonObject Data);
      void failedLoginSignal(int errorState);
-    void connectToTheServer();
+    void connectToTheServer(QString ip);
 
 
 private slots:

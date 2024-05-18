@@ -47,6 +47,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         getaccbalance.h getaccbalance.cpp getaccbalance.ui
         maketransfer.h maketransfer.cpp maketransfer.ui
         iuser.h iuser.cpp
+        resource.qrc
 
 
 

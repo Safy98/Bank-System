@@ -177,7 +177,7 @@ void WindowManager::createMainUI()
 
 void WindowManager::createAdminUI()
 {
-    adminUI = new AdminInterface();
+    adminUI = new AdminInterface(serverIP);
 
 
     connect(adminUI,&AdminInterface::Request,this,&WindowManager::requestReady);
@@ -190,7 +190,7 @@ void WindowManager::createAdminUI()
 
 void WindowManager::createUserUI(QString name)
 {
-    userUI = new UserInterface(name);
+    userUI = new UserInterface(name,serverIP);
 
     //connects
     connect(userUI,&UserInterface::Request,this,&WindowManager::makeRequest);
@@ -219,9 +219,10 @@ void WindowManager::closeMainUI()
     mainWindow=nullptr;
 }
 
-void WindowManager::connectToTheServer()
+void WindowManager::connectToTheServer(QString ip)
 {
-    emit requestConnection();
+    serverIP = ip;
+    emit requestConnection(ip);
 }
 
 

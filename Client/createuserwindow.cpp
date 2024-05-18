@@ -14,6 +14,8 @@ CreateUserWindow::CreateUserWindow(QWidget *parent)
     ui->label_ageError->hide();
     ui->label_passwordError->hide();
     ui->label_confPasswordError->hide();
+    setWindowFlag(Qt::FramelessWindowHint);
+
 }
 
 CreateUserWindow::~CreateUserWindow()

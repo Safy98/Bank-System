@@ -67,9 +67,9 @@ void AccountController::retriveResponse(QByteArray response)
 }
 
 
-void AccountController::requestConnection()
+void AccountController::requestConnection(QString ip)
 {
-    tcpController->makeConnection();
+    tcpController->makeConnection(ip);
 
 
 }

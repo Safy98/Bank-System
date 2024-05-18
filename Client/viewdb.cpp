@@ -8,6 +8,7 @@ ViewDB::ViewDB(QWidget *parent)
     ui->setupUi(this);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::Stretch);
 
+    setWindowFlag(Qt::FramelessWindowHint);
 
 }
 

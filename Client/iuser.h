@@ -49,7 +49,7 @@ protected slots:
 signals:
 
     void Request(QJsonObject request);
-    void connectToTheServer(void);
+    void connectToTheServer(QString ip);
 
     void logout(void);
 };

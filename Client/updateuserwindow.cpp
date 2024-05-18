@@ -12,6 +12,7 @@ UpdateUserWindow::UpdateUserWindow(QWidget *parent)
     ui->label_passwordError->hide();
     ui->label_confirmPasswordError->hide();
     ui->label_ageError->hide();
+    setWindowFlag(Qt::FramelessWindowHint);
 
 }
 

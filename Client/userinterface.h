@@ -21,7 +21,7 @@ class UserInterface : public IUser
     Q_OBJECT
 
 public:
-    explicit UserInterface(QString name , IUser * parent = nullptr);
+    explicit UserInterface(QString name ,QString ip, IUser * parent = nullptr);
     ~UserInterface();
 
 public slots:
@@ -75,6 +75,7 @@ private:
     AgetAccountNumWindow *getAccNumUI;
     ViewTransHistory *viewTransHistory;
     MakeTransfer *makeTransferUI;
+    QString serverIP;
 
     // IUser interface
 protected slots:

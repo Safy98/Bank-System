@@ -51,7 +51,7 @@ max-height:30px
          <property name="styleSheet">
           <string notr="true">QLabel{
 
-font-weight:500;
+font-weight:bold;
 
 }</string>
          </property>
@@ -100,7 +100,7 @@ font-size:16px;
          <property name="styleSheet">
           <string notr="true">QLabel{
 
-font-weight:500;
+font-weight:bold;
 
 }</string>
          </property>
@@ -150,7 +150,7 @@ font-size:16px;
          <property name="styleSheet">
           <string notr="true">QLabel{
 
-font-weight:500;
+font-weight:bold;
 
 }</string>
          </property>
@@ -199,7 +199,7 @@ font-size:16px;
          <property name="styleSheet">
           <string notr="true">QLabel{
 
-font-weight:500;
+font-weight:bold;
 
 }</string>
          </property>
@@ -248,7 +248,7 @@ font-size:16px;
          <property name="styleSheet">
           <string notr="true">QLabel{
 
-font-weight:500;
+font-weight:bold;
 
 }</string>
          </property>

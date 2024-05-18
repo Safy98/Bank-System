@@ -1,9 +1,9 @@
 #include "admininterface.h"
 #include "ui_admininterface.h"
 
-AdminInterface::AdminInterface(IUser * parent)
+AdminInterface::AdminInterface(QString ip,IUser * parent)
     :IUser (parent)
-    ,ui(new Ui::AdminInterface)
+    ,ui(new Ui::AdminInterface),serverIP(ip)
 {
     ui->setupUi(this);
     ui->pushButton_connectState->setStyleSheet("QPushButton{height:40px; background-color:green ;}");
@@ -367,7 +367,7 @@ void AdminInterface::on_pbGetAccountBalance_clicked()
 
 void AdminInterface::on_pushButton_connectState_clicked()
 {
-    emit connectToTheServer();
+    emit connectToTheServer(serverIP);
 
 }
 

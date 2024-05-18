@@ -36,6 +36,7 @@ void Server::startServer(qint16 port)
     }
     ServerLogs->log ("Listening on port: " + QString::number(port));
     qInfo() << ("Listening on port: " + QString::number(port));
+    qInfo()<<"main thread : "<<QThread::currentThread();
 }
 
 
@@ -49,6 +50,7 @@ void Server::quitServer()
 void Server::incomingConnection(qintptr handle)
 {
     ServerLogs->log("new incoming connection");
+    qInfo()<<"new incoming connection";
     ClientHandler *handler = new ClientHandler(globalMutex,handle,this);
     handler->setAutoDelete(true);
     pool->start(handler);

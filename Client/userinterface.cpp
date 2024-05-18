@@ -1,9 +1,9 @@
 #include "userinterface.h"
 #include "ui_userinterface.h"
 
-UserInterface::UserInterface(QString name , IUser * parent )
+UserInterface::UserInterface(QString name ,QString ip, IUser * parent )
     : IUser(parent)
-    , ui(new Ui::UserInterface)
+    , ui(new Ui::UserInterface),serverIP(ip)
 {
     ui->setupUi(this);
     ui->label->setText("Welcome "+name);
@@ -268,6 +268,6 @@ void UserInterface::on_pushButton_makeTransfer_clicked()
 
 void UserInterface::on_pushButton_connectState_clicked()
 {
-    emit connectToTheServer();
+    emit connectToTheServer(serverIP);
 }
 

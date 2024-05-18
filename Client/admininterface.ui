@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Bank System</string>
   </property>
   <property name="styleSheet">
    <string notr="true">AdminInterface{
@@ -291,22 +291,6 @@ font-size:24px;
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <spacer name="horizontalSpacer_9">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QPushButton" name="pbGetAccountNum">
        <property name="maximumSize">
         <size>
@@ -351,7 +335,7 @@ font-size:24px;
       <widget class="QLabel" name="label">
        <property name="maximumSize">
         <size>
-         <width>250</width>
+         <width>400</width>
          <height>16777215</height>
         </size>
        </property>
@@ -362,7 +346,8 @@ font-size:24px;
 color : #DBD9D9;
 font-size: 32px;
 font-weight:bold;
-width : 452px;
+min-width : 400px;
+max-width:400px;
 height: 39px;
 
 
@@ -373,6 +358,9 @@ height: 39px;
        </property>
        <property name="text">
         <string>Welcome Admin</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -417,22 +405,6 @@ font-size:24px;
         <string>View Bank DataBase</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_10">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>

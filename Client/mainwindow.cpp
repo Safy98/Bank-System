@@ -6,13 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPixmap imtPic("../../icons/logo.png");
+    QPixmap imtPic(":/imges/icons/logo.png");
 
     ui->label_ImtIcon->setPixmap(imtPic.scaled(200,200,Qt::KeepAspectRatio));
-
-    QPixmap corePic("../../icons/core.png");
+    QPixmap corePic(":/imges/icons/core.png");
     ui->label_CoreTechIcon->setPixmap(corePic.scaled(180,250,Qt::KeepAspectRatio));
     loginUI = nullptr;
+
+    ui->lineEdit_ip->setEnabled(true);
+
+
 
 }
 
@@ -23,7 +26,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pbContinue_clicked()
 {
-    emit connectToTheServer();
+
+    emit connectToTheServer(ui->lineEdit_ip->text());
 
 
 
@@ -56,6 +60,7 @@ void MainWindow::connectedSuccessfully()
         ui->pbContinue->hide();
         ui->label_ImtIcon->hide();
         ui->label_CoreTechIcon->hide();
+        ui->lineEdit_ip->setEnabled(false);
         loginUI = new Login(this);
         connect(loginUI,&Login::loginDataAquired,this,&MainWindow::loginDataAquired);
         connect(this,&MainWindow::failedLoginSignal,loginUI,&Login::failedLoginSlot);

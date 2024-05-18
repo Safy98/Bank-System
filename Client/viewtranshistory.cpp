@@ -10,6 +10,8 @@ ViewTransHistory::ViewTransHistory(QWidget *parent)
     ui->label_AccountNumError->hide();
     ui->label_coutError->hide();
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::Stretch);
+    setWindowFlag(Qt::FramelessWindowHint);
+
 }
 
 ViewTransHistory::~ViewTransHistory()

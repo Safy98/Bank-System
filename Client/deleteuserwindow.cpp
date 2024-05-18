@@ -7,6 +7,8 @@ DeleteUserWindow::DeleteUserWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->label_error->hide();
+    setWindowFlag(Qt::FramelessWindowHint);
+
 }
 
 DeleteUserWindow::~DeleteUserWindow()
